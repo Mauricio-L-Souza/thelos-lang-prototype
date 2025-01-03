@@ -1,0 +1,27 @@
+// NEW ATTRIBUITION TOKEN
+$=
+
+// CONCAT TOKEN
+.|
+
+// INLINE FUNCTION
+method sayHello :> dec str name, dec number age -> outputln => "olá " .| nome .| ", " .| age .| ". Seja bem vindo!";
+
+// BLOCK FUNCTION
+method sayHello :> dec str name, dec number age -> start
+    outputln => "olá " .| nome .| ", " .| age .| ". Seja bem vindo!";
+end
+
+// ANONIMOUS INLINE FUNCTION
+callable :> dec str name, dec number age -> outputln => "olá " .| nome .| ", " .| age .| ". Seja bem vindo!";
+
+// ANONIMOUS BLOCK FUNCTION
+callable :> dec str name, dec number age -> start
+    outputln => "olá " .| nome .| ", " .| age .| ". Seja bem vindo!";
+end
+
+// ASSOCIATIVE type
+pair
+    'name' -> value
+pair;
+
