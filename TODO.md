@@ -29,6 +29,6 @@ TODO:
 - ADD ARRAY
 - ADD ASSOCIATIVE
 
--> Trabalhar no parser não recursivo
--> Implementar todos os erros base
--> Remover necessidade de ter :> para métodos sem parametros
+Trabalhar no parser não recursivo
+Implementar todos os erros base
+Remover necessidade de ter :> para métodos sem parametros
