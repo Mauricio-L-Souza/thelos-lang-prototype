@@ -5,8 +5,6 @@ TODO:
     - type
 - ADD WORD STATEMENT // Para enfatizar variáveis/métodos
     - typo
-- ADD BLOCKS // Para funções, condicionais em blocos
-    - multiple expressions
 - ADD SCOPES // Para gerenciamento de variáveis locais
     - variables by scopes
     - Map variables from scope to program variables
