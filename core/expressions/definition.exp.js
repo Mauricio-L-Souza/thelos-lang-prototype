@@ -1,11 +1,13 @@
 const Program = require("../globals/program");
+const Expression = require("./expression");
 
-class Definition {
+class Definition extends Expression {
     args = [];
     body = null;
     typo = null;
 
     constructor(typo, args, body) {
+        super();
         this.args = args;
         this.body = body;
         this.typo = typo;

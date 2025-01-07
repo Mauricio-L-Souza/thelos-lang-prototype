@@ -1,11 +1,14 @@
 const Program = require("../globals/program");
+const { prepare_value } = require("../globals/utils");
+const Expression = require("./expression");
 
-class Comparision {
+class Comparision  extends Expression{
     left;
     operand;
     right;
 
     constructor(left, operand, right) {
+        super();
         this.left = left;
         this.operand = operand;
         this.right = right;
@@ -16,8 +19,8 @@ class Comparision {
      * @param {Program} program 
      */
     perform(program) {
-        let left = this.__prepareValues(program, this.left);
-        let right = this.__prepareValues(program, this.right);
+        let left = prepare_value(program, this.left);
+        let right = prepare_value(program, this.right);
         switch (this.operand) {
             case '&eq':
                 return left === right;
@@ -31,20 +34,6 @@ class Comparision {
                 return left >= right;
             case '&lte':
                 return left <= right;
-        }
-    }
-
-    /**
-     * 
-     * @param {Program} program 
-     */
-    __prepareValues(program, value) {
-        if (value.charAt(0) === "\"") {
-            return JSON.parse(value).length;
-        } else if (!Number.isNaN(Number(value))) {
-            return Number(value);
-        } else if (program.recoverVariable(value)) {
-            return this.__prepareValues(program, program.recoverVariable(value));
         }
     }
 }

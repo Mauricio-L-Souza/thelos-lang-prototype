@@ -1,10 +1,12 @@
 const Program = require("../globals/program");
+const Expression = require("./expression");
 
-class Atribuition {
+class Atribuition extends Expression {
     value = null;
     typo = null;
 
     constructor(value, typo) {
+        super();
         this.value = value;
         this.typo = typo;
     }

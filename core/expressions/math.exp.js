@@ -1,9 +1,12 @@
-class Math {
+const Expression = require("./expression");
+
+class Math  extends Expression{
     left = null;
     operand = null;
     right = null;
 
     constructor(left, operand, right) {
+        super();
         this.left = left;
         this.operand = operand;
         this.right = right;
