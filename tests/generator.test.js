@@ -9,6 +9,7 @@ const Definition = require('../core/expressions/definition.exp');
 const Declaration = require('../core/expressions/declaration.exp');
 const Atribuition = require('../core/expressions/atribuition.exp');
 const Comparision = require('../core/expressions/comparision.exp');
+const Block = require('../core/expressions/block.exp');
 
 test('test_it_can_generate_declaration_expression', () => {
     let scope = new Scope();
@@ -265,4 +266,40 @@ test('test_it_can_generate_definition_with_more_than_one_argument_expression', (
     expect(expression.args[1]).toHaveProperty('value', null);
     expect(expression.args[1]).toHaveProperty('type', 'number');
     expect(expression.args[1]).toHaveProperty('typo', 'b');
+});
+
+test('test_it_can_generate_definition_with_block_expression', () => {
+    let tokens = tokenizer.parse('method math :> dec number a, dec number b -> start outputln => "entrou no bloco"; a + b; outputln => "processou do bloco"; end');
+
+    let scope = new Scope();
+    scope.name = 'main';
+    scope.statements = [];
+
+    let script = generator.generate(tokens, scope);
+
+    expect(script).toBeInstanceOf(Scope);
+    expect(script).toHaveProperty('name', 'main');
+
+    let expression = script.statements[0];
+
+    expect(expression).toBeInstanceOf(Definition);
+    expect(expression).toHaveProperty('typo', 'math');
+    expect(expression.args.length).toBe(2);
+
+    expect(expression.args[0]).toBeInstanceOf(Declaration);
+    expect(expression.args[0]).toHaveProperty('value', null);
+    expect(expression.args[0]).toHaveProperty('type', 'number');
+    expect(expression.args[0]).toHaveProperty('typo', 'a');
+
+    expect(expression.args[1]).toBeInstanceOf(Declaration);
+    expect(expression.args[1]).toHaveProperty('value', null);
+    expect(expression.args[1]).toHaveProperty('type', 'number');
+    expect(expression.args[1]).toHaveProperty('typo', 'b');
+
+    expect(expression.body).toBeInstanceOf(Block);
+    let block = expression.body;
+    expect(block.statements.length).toBe(3);
+    expect(block.statements[0]).toBeInstanceOf(Call);
+    expect(block.statements[1]).toBeInstanceOf(Math);
+    expect(block.statements[2]).toBeInstanceOf(Call);
 });

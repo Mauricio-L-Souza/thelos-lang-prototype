@@ -157,6 +157,16 @@ function parse(code) {
             continue;
         }
 
+        if ([ParserTypes.BLOCK_START, ParserTypes.BLOCK_END].includes(word)) {
+            tokens.push({
+                type: ParserTypes.BLOCK,
+                value: word,
+                ...tokenPos
+            });
+
+            continue;
+        }
+
         if (starts_with_letter(word) && !has_special_charactere(word)) {
             tokens.push({
                 type: ParserTypes.WORD,

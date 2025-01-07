@@ -8,6 +8,7 @@ const Definition = require("./expressions/definition.exp");
 const Declaration = require("./expressions/declaration.exp");
 const Atribuition = require("./expressions/atribuition.exp");
 const Comparision = require("./expressions/comparision.exp");
+const Block = require("./expressions/block.exp");
 
 /**
  * 
@@ -33,6 +34,19 @@ function buildStatement(token, tokens, sentence) {
         tokens.next();
         sentence.push(token.value);
         return buildStatement(tokens.consume(), tokens, sentence);
+    }
+
+    if (token.value === ParserTypes.BLOCK_START) {
+        tokens.next();
+        let block = [];
+
+        while (tokens.consume().value !== ParserTypes.BLOCK_END) {
+            block.push(buildStatement(tokens.consume(), tokens, []));
+        }
+
+        tokens.next();
+
+        return new Block(block);
     }
 
     if (token.type === ParserTypes.OPERAND) {
@@ -157,6 +171,11 @@ function buildStatement(token, tokens, sentence) {
     }
 
     if (token.value === ParserTypes.ESP) {
+        return sentence;
+    }
+
+    if (token.value === ParserTypes.BLOCK_END) {
+        tokens.next();
         return sentence;
     }
 

@@ -36,6 +36,12 @@ class ParserTypes {
     static GREATER_THAN = '&gt';
     static LOWER_THAN_EQUAL = '&lte';
     static GREATER_THAN_EQUAL = '&gte';
+
+    // Block
+    static BLOCK = 'block';
+    static BLOCK_END = 'end';
+    static BLOCK_START = 'start';
+
 }
 
 module.exports = ParserTypes;

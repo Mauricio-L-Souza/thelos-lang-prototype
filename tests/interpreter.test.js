@@ -93,3 +93,23 @@ test('test_it_can_interpret_call_defined_method_expression', () => {
 
     expect(interpreter.interpret(scope)).toBe(1);
 });
+
+test('test_it_can_interpret_call_defined_method_with_block_expression', () => {
+    let scope = new Scope();
+    scope.name = 'program';
+
+    let tokens = tokenizer.parse('method math :> dec number a, dec number b -> start outputln => "entrou no bloco"; a + b; outputln => "processou do bloco"; end');
+    scope = generator.generate(tokens, scope);
+
+    expect(interpreter.interpret(scope)).toBe(1);
+});
+
+test('test_it_can_interpret_block_expression', () => {
+    let scope = new Scope();
+    scope.name = 'program';
+
+    let tokens = tokenizer.parse('method math :> dec number a, dec number b -> start outputln => "entrou no bloco"; a + b; outputln => "processou do bloco"; end math => 5, 6;');
+    scope = generator.generate(tokens, scope);
+
+    expect(interpreter.interpret(scope)).toBe(1);
+});

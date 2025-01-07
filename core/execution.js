@@ -3,6 +3,9 @@ const Program = require("./globals/program");
 const Builtin = require("./builtins/builtin");
 const Math = require("./expressions/math.exp");
 const Call = require("./expressions/call.exp");
+const Block = require("./expressions/block.exp");
+const { prepare_value } = require("./globals/utils");
+const Expression = require("./expressions/expression");
 const Definition = require("./expressions/definition.exp");
 const Atribuition = require("./expressions/atribuition.exp");
 const Declaration = require("./expressions/declaration.exp");
@@ -50,8 +53,18 @@ function execute(statement, program) {
     if (statement instanceof Call && program.recoverMethod(statement.typo)) {
         let method = program.recoverMethod(statement.typo);
 
+        let args = [];
+
+        for (const arg of statement.arguments) {
+            if (arg instanceof Expression) {
+                args.push(execute(arg, program));
+                continue;
+            }
+            args.push(prepare_value(program, arg));
+        }
+
         if (method instanceof Builtin) {
-            return method.perform(statement.arguments[0]);
+            return method.perform(args);
         }
 
         if (method instanceof Definition) {
@@ -72,6 +85,14 @@ function execute(statement, program) {
         }
 
         throw new Error('InterpreterError: method type not implemented');
+    }
+
+    if (statement instanceof Block) {
+        for (const expression of statement.statements) {
+            execute(expression, program);
+        }
+
+        return;
     }
 
     if (statement instanceof Definition) {
