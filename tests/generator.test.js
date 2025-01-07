@@ -7,7 +7,7 @@ const Math = require('../core/expressions/math.exp');
 const Call = require('../core/expressions/call.exp');
 const Definition = require('../core/expressions/definition.exp');
 const Declaration = require('../core/expressions/declaration.exp');
-const Atribuition = require('../core/expressions/atribuition.exp');
+const Attribuition = require('../core/expressions/attribuition.exp');
 const Comparision = require('../core/expressions/comparision.exp');
 const Block = require('../core/expressions/block.exp');
 
@@ -43,7 +43,7 @@ test('test_it_can_generate_atribuition_expression', () => {
 
     let expression = script.statements[0];
 
-    expect(expression).toBeInstanceOf(Atribuition);
+    expect(expression).toBeInstanceOf(Attribuition);
     expect(expression).toHaveProperty('value', '"string"');
     expect(expression).toHaveProperty('typo', 'variable');
 });
@@ -139,11 +139,11 @@ test('test_it_can_generate_conditional_verificarion', () => {
     expect(expression.condition).toHaveProperty('operand', '&gt');
     expect(expression.condition).toHaveProperty('right', '5');
 
-    expect(expression.implies).toBeInstanceOf(Atribuition);
+    expect(expression.implies).toBeInstanceOf(Attribuition);
     expect(expression.implies).toHaveProperty('value', '10');
     expect(expression.implies).toHaveProperty('typo', 'variable');
 
-    expect(expression.otherwise).toBeInstanceOf(Atribuition);
+    expect(expression.otherwise).toBeInstanceOf(Attribuition);
     expect(expression.otherwise).toHaveProperty('value', '2');
     expect(expression.otherwise).toHaveProperty('typo', 'variable');
 

@@ -1,7 +1,7 @@
 const Program = require("../globals/program");
 const Expression = require("./expression");
 
-class Atribuition extends Expression {
+class Attribuition extends Expression {
     value = null;
     typo = null;
 
@@ -24,4 +24,4 @@ class Atribuition extends Expression {
     }
 }
 
-module.exports = Atribuition;
+module.exports = Attribuition;

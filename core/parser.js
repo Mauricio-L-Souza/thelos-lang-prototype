@@ -6,7 +6,7 @@ const Math = require("./expressions/math.exp");
 const Call = require("./expressions/call.exp");
 const Definition = require("./expressions/definition.exp");
 const Declaration = require("./expressions/declaration.exp");
-const Atribuition = require("./expressions/atribuition.exp");
+const Attribuition = require("./expressions/attribuition.exp");
 const Comparision = require("./expressions/comparision.exp");
 const Block = require("./expressions/block.exp");
 
@@ -87,7 +87,7 @@ function buildStatement(token, tokens, sentence) {
         if (Array.isArray(sentence)) {
             sentence = sentence.shift();
         }
-        return new Atribuition(sentence, typo);
+        return new Attribuition(sentence, typo);
     }
 
     if (token.value === ParserTypes.CALL) {

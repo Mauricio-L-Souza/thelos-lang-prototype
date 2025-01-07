@@ -7,7 +7,7 @@ const Block = require("./expressions/block.exp");
 const { prepare_value } = require("./globals/utils");
 const Expression = require("./expressions/expression");
 const Definition = require("./expressions/definition.exp");
-const Atribuition = require("./expressions/atribuition.exp");
+const Attribuition = require("./expressions/attribuition.exp");
 const Declaration = require("./expressions/declaration.exp");
 const Comparision = require("./expressions/comparision.exp");
 
@@ -21,7 +21,7 @@ function execute(statement, program) {
         return statement.perform(program);
     }
 
-    if (statement instanceof Atribuition) {
+    if (statement instanceof Attribuition) {
         if (statement.canDoAttribuition(program) === 2) return 2;
         if (typeof statement.value === 'string') {
             return statement.perform(program);
